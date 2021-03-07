@@ -1,18 +1,24 @@
 #ifndef _MATRIX_H_
-#define _MATRIX_
+#define _MATRIX_H_
 
 #include <Arduino.h>
 
-#define MATRIX_MAX_SIZE 50 //bytes; 50/2 = 25 is the maximum number of items in the buffer
+#include "enums.h"
 
 class Matrix {
   public:
   
     Matrix(int rows = 3, int columns = 3);
 
-    void setValue(int row, int column, int value);
+    bool rotate(Rotation rotation, AngleUnit unit, float angle); 
+
+    void multiplyConstant(float value);
+
+    void setValue(int row, int column, float value);
     
-    void setZero();
+    float getValue(int row, int column);
+
+    void setAll(float value);
 
     void print();
 
@@ -20,7 +26,7 @@ class Matrix {
 
     int _getIndex(int row, int column);
 
-    int * _matrixArray;
+    float * _matrixArray;
 
     int _rows;
     int _columns;
